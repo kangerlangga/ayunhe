@@ -54,7 +54,7 @@
                                         <i class="fas fa-pen"></i>
                                     </button>
                                 </a>
-                                <a href="{{ route('home.delete', $H->id_home_sliders) }}" class="tbl-hapus">
+                                <a href="{{ route('home.delete', $H->id_home_sliders) }}" class="but-delete">
                                     <button type="button" class="btn btn-icon btn-round btn-danger">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -98,32 +98,26 @@
 </div>
 @include('layouts.admin.script')
 <script>
-    $(document).ready(function() {
-        $('#basic-datatables').DataTable({
+    $(document).on('click','.but-delete',function(e) {
+
+        e.preventDefault();
+        const href1 = $(this).attr('href');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This data will be Permanently Deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#fd7e14',
+            confirmButtonText: 'DELETE',
+            cancelButtonText: 'CANCEL'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.location.href = href1;
+            }
         });
     });
-
-    $(document).on('click','.tbl-hapus',function(e) {
-
-    //Hentikan aksi default
-    e.preventDefault();
-    const href1 = $(this).attr('href');
-
-    Swal.fire({
-    title: 'Apakah Anda Yakin?',
-    text: "Data Ini Akan Dihapus Secara Permanen!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#d33',
-    cancelButtonColor: '#fd7e14',
-    confirmButtonText: 'HAPUS DATA',
-    cancelButtonText: 'BATAL'
-    }).then((result) => {
-    if (result.isConfirmed) {
-        document.location.href = href1;
-    }
-    })
-    })
 
     //message with sweetalert
     @if(session('success'))

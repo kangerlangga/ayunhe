@@ -34,7 +34,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                            <form method="POST" action="{{ route('home.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('home.update', $EditHomeS->id_home_sliders) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -47,7 +47,7 @@
                                                 <span class="d-sm-none"><br></span>
                                                 Standard Size 1600px x 900px
                                             </label>
-											<input type="file" class="form-control-file" id="ImageS" name="ImageS" accept=".png, .jpg, .jpeg" required>
+											<input type="file" class="form-control-file" id="ImageS" name="ImageS" accept=".png, .jpg, .jpeg">
                                             @error('ImageS')
                                             <small id="ImageS" class="form-text text-muted">{{ $message }}</small>
                                             @enderror
@@ -57,25 +57,25 @@
                                         <div class="form-group">
                                             <label for="visibility">Visibility</label>
                                             <select class="form-control" id="visibility" name="visibility">
-                                                <option name='visibility' value='Showing'>Showing (Publish)</option>
-                                                <option name='visibility' value='Hiding'>Hiding (Unpublish)</option>
+                                                <option name='visibility' value='Showing' {{ $EditHomeS->visib_home_sliders == 'Showing' ? 'selected' : '' }}>Showing (Publish)</option>
+                                                <option name='visibility' value='Hiding' {{ $EditHomeS->visib_home_sliders == 'Hiding' ? 'selected' : '' }}>Hiding (Unpublish)</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="Author">Author (Your Profile Name)</label>
-                                            <input class="form-control" name="Author" value="{{ Auth::user()->nama }}" id="Author" readonly style="cursor: not-allowed">
+                                            <label for="Author">Author (Account name that Added)</label>
+                                            <input class="form-control" name="Author" value="{{ $EditHomeS->author_home_sliders }}" id="Author" readonly style="cursor: not-allowed">
                                         </div>
                                     </div>
                                     <div class="col-sm-12 mt-1">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary fw-bold text-uppercase">
+                                            <button type="submit" class="btn btn-success fw-bold text-uppercase">
                                                 <i class="fas fa-save mr-2"></i>Save
                                             </button>
-                                            <button type="reset" class="btn btn-warning fw-bold text-uppercase">
-                                                <i class="fas fa-undo mr-2"></i>Reset
-                                            </button>
+                                            <a href="{{ route('home.data') }}" class="btn btn-warning fw-bold text-uppercase but-back">
+                                                <i class="fas fa-chevron-circle-left mr-2"></i>Back
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -90,23 +90,27 @@
     </div>
 </div>
 @include('layouts.admin.script')
-<script>
-    //message with sweetalert
-    @if(session('success'))
-    Swal.fire({
-        icon: "success",
-        title: "{{ session('success') }}",
-        showConfirmButton: false,
-        timer: 3000
+<script type="text/javascript">
+    $(document).on('click','.but-back',function(e) {
+
+        e.preventDefault();
+        const href1 = $(this).attr('href');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Changes will not be Saved!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#198754',
+            cancelButtonColor: '#fd7e14',
+            confirmButtonText: 'BACK',
+            cancelButtonText: 'CANCEL'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.location.href = href1;
+            }
+        });
     });
-    @elseif(session('error'))
-    Swal.fire({
-        icon: "error",
-        title: "{{ session('error') }}",
-        showConfirmButton: false,
-        timer: 3000
-    });
-    @endif
 </script>
 @endsection
 

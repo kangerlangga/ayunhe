@@ -68,17 +68,17 @@ $(function () {
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 footer-links">
                         <h4 class="h4">Menu</h4>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Collection</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="{{ route('home.publik') }}">Home</a></li>
+                            <li><a href="{{ route('about.publik') }}">About Us</a></li>
+                            <li><a href="{{ route('collection.publik') }}">Collection</a></li>
+                            <li><a href="{{ route('blog.publik') }}">Blog</a></li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 footer-links">
                         <h4 class="h4">Social Media</h4>
                         <ul>
-                            <li><a href="#">Instagram</a></li>
-                            <li><a href="#">Tiktok</a></li>
+                            <li><a href="https://instagram.com/ayunhe.id">Instagram</a></li>
+                            <li><a href="https://www.tiktok.com/@ayunhe_bintang_indonesia">Tiktok</a></li>
                             <li><a href="#">Whatsapp</a></li>
                             <li><a href="#">Email</a></li>
                         </ul>
