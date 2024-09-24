@@ -78,10 +78,10 @@
                                 <!--start product image -->
                                 <a href="#" class="grid-view-item__link">
                                     <!-- image -->
-                                    <img class="primary blur-up lazyload" data-src="{{ url('') }}/assets1/img/Produk/{{ $P->image_p_products }}" src="{{ url('') }}/assets1/img/Produk/{{ $P->image_p_products }}" alt="image" title="product" />
+                                    <img class="primary blur-up lazyload" data-src="{{ url('') }}/assets1/img/Product/{{ $P->image_p_products }}" src="{{ url('') }}/assets1/img/Product/{{ $P->image_p_products }}" alt="{{ $P->name_products }}"/>
                                     <!-- End image -->
                                     <!-- Hover image -->
-                                    <img class="hover blur-up lazyload" data-src="{{ url('') }}/assets1/img/Produk/{{ $P->image_s_products }}" src="{{ url('') }}/assets1/img/Produk/{{ $P->image_s_products }}" alt="image" title="product" />
+                                    <img class="hover blur-up lazyload" data-src="{{ url('') }}/assets1/img/Product/{{ $P->image_s_products }}" src="{{ url('') }}/assets1/img/Product/{{ $P->image_s_products }}" alt="{{ $P->name_products }}"/>
                                     <!-- End hover image -->
                                 </a>
                                 <!-- end product image -->

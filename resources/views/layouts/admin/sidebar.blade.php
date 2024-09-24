@@ -20,7 +20,12 @@
                         <ul class="nav">
                             <li>
                                 <a href="#">
-                                    <span class="link-collapse">Edit Profil</span>
+                                    <span class="link-collapse">Edit Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="link-collapse">Change Password</span>
                                 </a>
                             </li>
                             <li>
@@ -45,8 +50,8 @@
                         <p>Home Sliders</p>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('admin/products*') ? 'active' : '' }}">
-                    <a href="{{ url('/admin/products') }}">
+                <li class="nav-item {{ Request::is('admin/product*') ? 'active' : '' }}">
+                    <a href="{{ route('product.data') }}">
                         <i class="fas fa-shopping-bag"></i>
                         <p>Products</p>
                     </a>

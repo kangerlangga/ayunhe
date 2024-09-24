@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeSliderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublikController;
 use App\Http\Middleware\CheckAdmin;
@@ -28,6 +29,13 @@ Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
     Route::get('/admin/home/edit/{id}', [HomeSliderController::class, 'edit'])->name('home.edit');
     Route::post('/admin/home/update/{id}', [HomeSliderController::class, 'update'])->name('home.update');
     Route::get('/admin/home/delete/{id}', [HomeSliderController::class, 'destroy'])->name('home.delete');
+
+    Route::get('/admin/product', [ProductController::class, 'index'])->name('product.data');
+    Route::get('/admin/product/add', [ProductController::class, 'create'])->name('product.add');
+    Route::post('/admin/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/admin/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
 });
 
