@@ -29,7 +29,7 @@ class HomeSliderController extends Controller
     public function create(): View
     {
         $data = [
-            'judul' => 'New Home Sliders',
+            'judul' => 'New Home Slider',
         ];
         return view('pages.admin.home_add', $data);
     }

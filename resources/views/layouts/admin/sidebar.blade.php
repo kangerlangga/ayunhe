@@ -56,8 +56,8 @@
                         <p>Products</p>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('admin/blogs*') ? 'active' : '' }}">
-                    <a href="{{ url('/admin/blogs') }}">
+                <li class="nav-item {{ Request::is('admin/blog*') ? 'active' : '' }}">
+                    <a href="{{ route('blog.data') }}">
                         <i class="far fa-newspaper"></i>
                         <p>Blogs</p>
                     </a>

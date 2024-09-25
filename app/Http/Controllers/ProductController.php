@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function create(): View
     {
         $data = [
-            'judul' => 'New Products',
+            'judul' => 'New Product',
         ];
         return view('pages.admin.product_add', $data);
     }

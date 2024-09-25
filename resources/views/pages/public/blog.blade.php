@@ -67,7 +67,7 @@
                                     </h2>
                                     <span class="article__date">{{ $B->created_at->format('F d, Y') }}</span>
                                     <div class="rte article__grid-excerpt">
-                                        {{ Str::limit($B->content_blog, 135, '...') }}
+                                        {!! Str::limit(strip_tags($B->content_blog, '<b><i><u><strong><em>'), 135, '...') !!}
                                     </div>
                                     <ul class="list--inline article__meta-buttons">
                                     	<li><a href="#">Read more</a></li>

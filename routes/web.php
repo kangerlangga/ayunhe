@@ -37,6 +37,13 @@ Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
     Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/admin/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
+    Route::get('/admin/blog', [BlogController::class, 'index'])->name('blog.data');
+    Route::get('/admin/blog/add', [BlogController::class, 'create'])->name('blog.add');
+    Route::post('/admin/blog/store', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::post('/admin/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::get('/admin/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+
 });
 
 // Route::get('/dashboard', function () {
