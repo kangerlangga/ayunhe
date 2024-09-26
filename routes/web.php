@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +44,13 @@ Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
     Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
     Route::post('/admin/blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::get('/admin/blog/delete/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
+
+    Route::get('/admin/comment', [CommentController::class, 'index'])->name('comment.data');
+    Route::get('/admin/comment/add', [CommentController::class, 'create'])->name('comment.add');
+    Route::post('/admin/comment/store', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/admin/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
+    Route::post('/admin/comment/update/{id}', [CommentController::class, 'update'])->name('comment.update');
+    Route::get('/admin/comment/delete/{id}', [CommentController::class, 'destroy'])->name('comment.delete');
 
 });
 

@@ -30,41 +30,43 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                            <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('comment.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="form-group @error('Thumbnail') has-error has-feedback @enderror">
-                                            <label for="Thumbnail">
-                                                Thumbnail (PNG, JPG, JPEG)
-                                                <span class="d-sm-none"><br></span>
-                                                <span style="color: red;">Max 3 MB</span>
-                                                <span class="d-none d-sm-inline"> | </span>
-                                                <span class="d-sm-none"><br></span>
-                                                Standard Size 1080px x 1080px
-                                            </label>
-											<input type="file" class="form-control-file" id="Thumbnail" name="Thumbnail" accept=".png, .jpg, .jpeg" required>
-                                            @error('Thumbnail')
-                                            <small id="Thumbnail" class="form-text text-muted">{{ $message }}</small>
+                                        <div class="form-group @error('Author') has-error has-feedback @enderror">
+                                            <label for="Author">Author Name</label>
+                                            <input type="text" id="Author" name="Author" value="{{ old('Author') }}" class="form-control" required>
+                                            @error('Author')
+                                            <small id="Author" class="form-text text-muted">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group @error('Email') has-error has-feedback @enderror">
+                                            <label for="Email">Email</label>
+                                            <input type="email" id="Email" name="Email" value="{{ old('Email') }}" class="form-control" required>
+                                            @error('Email')
+                                            <small id="Email" class="form-text text-muted">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group @error('Phone') has-error has-feedback @enderror">
+                                            <label for="Phone">Phone Number</label>
+                                            <input type="tel" id="Phone" name="Phone" value="{{ old('Phone') }}" class="form-control" required>
+                                            @error('Phone')
+                                            <small id="Phone" class="form-text text-muted">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
-                                        <div class="form-group @error('Title') has-error has-feedback @enderror">
-                                            <label for="Title">Title</label>
-                                            <input type="text" id="Title" name="Title" value="{{ old('Title') }}" class="form-control" required>
-                                            @error('Title')
-                                            <small id="Title" class="form-text text-muted">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group @error('Content') has-error has-feedback @enderror">
-                                            <label for="Content">Content</label>
-                                            <textarea class="form-control" id="Content" name="Content">
+                                        <div class="form-group @error('Comment') has-error has-feedback @enderror">
+                                            <label for="Comment">Comment</label>
+                                            <textarea class="form-control" id="Comment" name="Comment">
                                             </textarea>
-                                            @error('Content')
-                                            <small id="Content" class="form-text text-muted">{{ $message }}</small>
+                                            @error('Comment')
+                                            <small id="Comment" class="form-text text-muted">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
@@ -75,12 +77,6 @@
                                                 <option name='visibility' value='Showing'>Showing (Publish)</option>
                                                 <option name='visibility' value='Hiding'>Hiding (Unpublish)</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="Author">Author (Your Profile Name)</label>
-                                            <input class="form-control" name="Author" value="{{ Auth::user()->nama }}" id="Author" readonly style="cursor: not-allowed">
                                         </div>
                                     </div>
                                     <div class="col-sm-12 mt-1">
@@ -139,31 +135,17 @@
         Paragraph,
         Bold,
         Italic,
-        Font,
-        Image,
-        ImageToolbar,
-        ImageCaption,
-        ImageStyle,
-        ImageUpload,
-        ImageResize
+        Font
     } from 'ckeditor5';
     ClassicEditor
-        .create( document.querySelector( '#Content' ), {
+        .create( document.querySelector( '#Comment' ), {
             plugins: [
-                Essentials, Paragraph, Bold, Italic, Font,
-                Image, ImageToolbar, ImageCaption, ImageStyle, ImageUpload, ImageResize
+                Essentials, Paragraph, Bold, Italic, Font
             ],
             toolbar: [
                 'undo', 'redo', '|', 'bold', 'italic', '|',
-                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
-                'imageUpload', 'imageStyle:full', 'imageStyle:side', 'imageTextAlternative'
-            ],
-            image: {
-                toolbar: [
-                    'imageStyle:full', 'imageStyle:side', '|',
-                    'imageTextAlternative', 'imageResize'
-                ]
-            }
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+            ]
         } )
         .then( editor => {
             window.editor = editor;

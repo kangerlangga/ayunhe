@@ -74,7 +74,7 @@
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="info-post ml-2">
-                                        <p class="username">{{ $P->code_products }} | {{ $P->name_products }}</p>
+                                        <p class="username">{{ $P->code_products }} | {{ $P->name_products }} ({{ $P->stock_products }})</p>
                                         <p class="date text-muted">Rp {{ number_format($P->price_products, 0, ',', '.') }}</p>
                                     </div>
                                 </div>

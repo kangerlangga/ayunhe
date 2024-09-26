@@ -62,8 +62,8 @@
                         <p>Blogs</p>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('admin/comments*') ? 'active' : '' }}">
-                    <a href="{{ url('/admin/comments') }}">
+                <li class="nav-item {{ Request::is('admin/comment*') ? 'active' : '' }}">
+                    <a href="{{ route('comment.data') }}">
                         <i class="fas fa-comments"></i>
                         <p>Comments</p>
                     </a>
