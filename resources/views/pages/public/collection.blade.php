@@ -70,9 +70,9 @@
                                 <!-- end product image -->
                                 <!-- product button -->
                                 {{-- <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                                    <button class="btn btn-addto-cart" type="button" tabindex="0">Add To Cart</button>
-                                </form> --}}
-                                {{-- <div class="button-set">
+                                    <button class="btn btn-addto-cart" type="button" tabindex="0">Buy Now</button>
+                                </form>
+                                <div class="button-set">
                                     <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
                                             <i class="icon anm anm-search-plus-r"></i>
                                         </a>
@@ -104,6 +104,7 @@
                                     <span class="price">Rp {{ number_format($P->price_products, 0, ',', '.') }}</span>
                                 </div>
                                 <!-- End product price -->
+                                <a href="{{ route('blog.publik') }}" class="btn" style="background-color: #35A5B1">Buy Now</a>
                             </div>
                             <!-- End product details -->
                         </div>

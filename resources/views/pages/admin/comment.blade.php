@@ -87,57 +87,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-md-4">
-                        <div class="card card-post card-round">
-                            <img class="card-img-top" src="{{ url('') }}/assets1/img/commentSlider/{{ $C->image_comments }}" alt="...">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <div class="info-post ml-2">
-                                        <p class="username">{{ $C->author_comments }}</p>
-                                        <p class="date text-muted">{{ $C->created_at->format('F d, Y') }}</p>
-                                    </div>
-                                </div>
-                                <div class="separator-solid"></div>
-                                <a href="{{ route('comment.edit', $C->id_comments) }}">
-                                    <button type="button" class="btn btn-icon btn-round btn-warning">
-                                        <i class="fas fa-pen"></i>
-                                    </button>
-                                </a>
-                                <a href="{{ route('comment.delete', $C->id_comments) }}" class="but-delete">
-                                    <button type="button" class="btn btn-icon btn-round btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </a>
-                                @if (Auth::user()->level == 'Super Admin')
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-icon btn-round btn-success" data-toggle="modal" data-target="#{{ $C->id_comments }}">
-                                        <i class="fas fa-history"></i>
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="{{ $C->id_comments }}" tabindex="-1" role="dialog" aria-labelledby="{{ $C->id_comments }}Label" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="{{ $C->id_comments }}Label"><b>Activity History</b></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Created : <br>{{ $C->created_by }} <b>({{ $C->created_at }})</b></p>
-                                                    <p>Last Modified : <br>{{ $C->modified_by }} <b>({{ $C->updated_at }})</b></p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div> --}}
                     @endforeach
                 </div>
             </div>

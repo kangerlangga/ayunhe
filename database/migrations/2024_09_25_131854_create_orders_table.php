@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('name_orders');
             $table->string('email_orders');
             $table->string('phone_orders');
-            $table->string('status_orders');
+            $table->string('product_orders');
+            $table->integer('qty_orders');
             $table->integer('total_orders');
             $table->string('payment_method');
+            $table->string('status_orders');
             $table->string('payment_status');
             $table->string('proof_of_payment')->nullable();
             $table->text('shipping_address');

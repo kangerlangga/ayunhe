@@ -19,12 +19,12 @@
                     <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                             <li>
-                                <a href="#">
+                                <a href="{{ route('prof.edit') }}">
                                     <span class="link-collapse">Edit Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('prof.edit.pass') }}">
                                     <span class="link-collapse">Change Password</span>
                                 </a>
                             </li>
@@ -68,9 +68,15 @@
                         <p>Comments</p>
                     </a>
                 </li>
+                <li class="nav-item {{ Request::is('admin/order*') ? 'active' : '' }}">
+                    <a href="{{ url('/admin/order') }}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Orders</p>
+                    </a>
+                </li>
                 @if (Auth::user()->level == 'Super Admin')
                 <li class="nav-item {{ Request::is('admin/user*') ? 'active' : '' }}">
-                    <a href="{{ url('/admin/user') }}">
+                    <a href="{{ route('user.data') }}">
                         <i class="fas fa-user-cog"></i>
                         <p>Users</p>
                     </a>
