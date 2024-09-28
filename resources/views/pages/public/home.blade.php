@@ -128,7 +128,7 @@
                     </div>
                     <div class="row">
                     	<div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                        	<a href="{{ route('collection.publik') }}" class="btn">Lihat Semua</a>
+                        	<a href="{{ route('collection.publik') }}" style="background-color: #35A5B1" class="btn">View All</a>
                         </div>
                     </div>
                 </div>
@@ -203,7 +203,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center mt-5">
-                        <a href="{{ route('blog.publik') }}" class="btn">Lihat Semua</a>
+                        <a href="{{ route('blog.publik') }}" style="background-color: #35A5B1" class="btn">View All</a>
                     </div>
                 </div>
             </div>

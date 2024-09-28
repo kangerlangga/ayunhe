@@ -11,6 +11,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/404', function () {
+//     $judul = 'Page Not Found';
+//     return view('pages.error.404', compact('judul'));
+// });
+
 Route::get('/', [PublikController::class, 'home'])->name('home.publik');
 Route::get('/about', [PublikController::class, 'about'])->name('about.publik');
 Route::get('/collection', [PublikController::class, 'collection'])->name('collection.publik');

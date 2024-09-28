@@ -39,7 +39,7 @@
                     <li class="lvl1"><a href="{{ route('about.publik') }}">About Us</a></li>
                     <li class="lvl1"><a href="{{ route('collection.publik') }}">Collection</a></li>
                     <li class="lvl1"><a href="{{ route('blog.publik') }}">Blog</a></li>
-                    <li class="lvl1"><a href="#"><b>Buy Now!</b> </a></li>
+                    <li class="lvl1"><a href="{{ route('collection.publik') }}"><b>Buy Now!</b> </a></li>
                   </ul>
                 </nav>
                 <!--End Desktop Menu-->
@@ -140,7 +140,7 @@
         <li class="lvl1"><a href="{{ route('about.publik') }}">About Us</a></li>
         <li class="lvl1"><a href="{{ route('collection.publik') }}">Collection</a></li>
         <li class="lvl1"><a href="{{ route('blog.publik') }}">Blog</a></li>
-        <li class="lvl1"><a href="#"><b>Buy Now!</b></a></li>
+        <li class="lvl1"><a href="{{ route('collection.publik') }}"><b>Buy Now!</b></a></li>
   </ul>
 </div>
 <!--End Mobile Menu-->
