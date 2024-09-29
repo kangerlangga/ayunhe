@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeSliderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublikController;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublikController::class, 'home'])->name('home.publik');
 Route::get('/about', [PublikController::class, 'about'])->name('about.publik');
 Route::get('/collection', [PublikController::class, 'collection'])->name('collection.publik');
+Route::get('/collection/buy/{id}', [PublikController::class, 'buy'])->name('collection.buy');
 Route::get('/blog', [PublikController::class, 'blog'])->name('blog.publik');
 Route::get('/blog/detail/{id}', [BlogController::class, 'show'])->name('blog.detail');
 
@@ -57,6 +59,13 @@ Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
     Route::get('/admin/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
     Route::post('/admin/comment/update/{id}', [CommentController::class, 'update'])->name('comment.update');
     Route::get('/admin/comment/delete/{id}', [CommentController::class, 'destroy'])->name('comment.delete');
+
+    Route::get('/admin/order', [OrderController::class, 'index'])->name('order.data');
+    Route::get('/admin/order/add', [OrderController::class, 'create'])->name('order.add');
+    Route::post('/admin/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
+    Route::post('/admin/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::get('/admin/order/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
 
     Route::get('/admin/user', [UserController::class, 'index'])->name('user.data');
     Route::get('/admin/user/add', [UserController::class, 'create'])->name('user.add');

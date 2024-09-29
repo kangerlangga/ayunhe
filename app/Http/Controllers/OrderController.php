@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -10,9 +14,13 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $data = [
+            'judul' => 'Orders',
+            'DataO' => Order::latest()->get(),
+        ];
+        return view('pages.admin.order', $data);
     }
 
     /**

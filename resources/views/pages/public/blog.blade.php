@@ -55,22 +55,22 @@
                 </div>
             	<div class="row">
                 	@foreach ($Blog as $B)
-                	<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                	<div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
                     	<div class="wrap-blog">
-                        	<a href="#" class="article__grid-image">
+                        	<a href="{{ route('blog.detail', $B->id_detail) }}" class="article__grid-image">
               					<img src="{{ url('') }}/assets1/img/Blog/{{ $B->thumbnail_blog }}" alt="{{ $B->title_blog }}" title="{{ $B->title_blog }}" class="blur-up lazyloaded"/>
 				            </a>
                             <div class="article__grid-meta article__grid-meta--has-image">
                                 <div class="wrap-blog-inner">
                                     <h2 class="h3 article__title">
-                                      <a href="#">{{ $B->title_blog }}</a>
+                                      <a href="{{ route('blog.detail', $B->id_detail) }}">{{ $B->title_blog }}</a>
                                     </h2>
                                     <span class="article__date">{{ $B->created_at->format('F d, Y') }}</span>
                                     <div class="rte article__grid-excerpt">
                                         {!! Str::limit(strip_tags($B->content_blog, '<b><i><u><strong><em>'), 135, '...') !!}
                                     </div>
                                     <ul class="list--inline article__meta-buttons">
-                                    	<li><a href="#">Read more</a></li>
+                                    	<li><a href="{{ route('blog.detail', $B->id_detail) }}">Read more</a></li>
                                     </ul>
                                 </div>
 							</div>

@@ -27,8 +27,8 @@
 	<meta NAME="Rating" CONTENT="General">
 
     <!-- WEBSITE META -->
-    <title>{{ $judul }} | Ayunhe Official Website</title>
-    <meta name="keywords" content="Ayunhe, Ayunhe Official Website">
+    <title>{{ $judul }} | Ayunhe Scarves</title>
+    <meta name="keywords" content="Ayunhe, Ayunhe Scarves, Ayunhe Official Website">
     <meta name="description" content="Ayunhe adalah sebuah perusahaan fashion yang berfokus pada produk hijab dan busana muslim.">
     <link rel="icon" type="image/png" href="{{  url('') }}/assets1/logo/logo.png">
 

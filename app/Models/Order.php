@@ -35,5 +35,5 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_orders','order_number','name_orders','email_orders','phone_orders','status_orders','total_orders','payment_method','payment_status','proof_of_payment','shipping_address','tracking_number','notes','created_by','modified_by'];
+    protected $fillable = ['id_orders','order_number','name_orders','email_orders','phone_orders','product_orders','qty_orders','total_orders','payment_method','status_orders','payment_status','proof_of_payment','shipping_address','tracking_number','notes','created_by','modified_by'];
 }

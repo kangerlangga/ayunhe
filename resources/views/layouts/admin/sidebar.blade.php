@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('admin/order*') ? 'active' : '' }}">
-                    <a href="{{ url('/admin/order') }}">
+                    <a href="{{ route('order.data') }}">
                         <i class="fas fa-shopping-cart"></i>
                         <p>Orders</p>
                     </a>

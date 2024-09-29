@@ -71,9 +71,15 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(string $id)
     {
-        //
+        $blogData = Blog::where('id_detail', $id)->where('visib_blog', 'Showing')->firstOrFail();
+
+        $data = [
+            'judul' => $blogData->title_blog,
+            'DetailBlog' => $blogData,
+        ];
+        return view('pages.public.blog_detail', $data);
     }
 
     /**
