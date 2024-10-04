@@ -103,6 +103,8 @@
                     <h2>Product Detail</h2>
                 	<hr/>
                     <img class="blur-up lazyload" data-src="{{ url('') }}/assets1/img/Product/{{ $DetailProduct->image_p_products }}" src="{{ url('') }}/assets1/img/Product/{{ $DetailProduct->image_p_products }}" alt="Buy Now" style="max-height: 35vh"/>
+                    <br class="d-sm-none">
+                    <br class="d-sm-none">
                     <img class="blur-up lazyload" data-src="{{ url('') }}/assets1/img/Product/{{ $DetailProduct->image_s_products }}" src="{{ url('') }}/assets1/img/Product/{{ $DetailProduct->image_s_products }}" alt="Buy Now" style="max-height: 35vh"/>
                     <div class="open-hours mt-2">
                     	<strong>{{ $DetailProduct->name_products }} | {{ $DetailProduct->code_products }}</strong>
