@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('product_orders');
             $table->integer('qty_orders');
             $table->integer('total_orders');
-            $table->string('payment_method');
+            $table->string('payment_method')->nullable();
             $table->string('status_orders');
             $table->string('payment_status');
             $table->string('proof_of_payment')->nullable();

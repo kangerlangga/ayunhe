@@ -6,6 +6,33 @@
 
 @section('content')
 <style>
+.status-pending {
+    color: #FF8C00;
+}
+.status-processing {
+    color: #007BFF;
+}
+.status-shipped {
+    color: #6A5ACD;
+}
+.status-delivered {
+    color: #228B22;
+}
+.status-canceled {
+    color: #DC143C;
+}
+.payment-pending {
+    color: #FFA500;
+}
+.payment-paid {
+    color: #32CD32;
+}
+.payment-failed {
+    color: #FF4500;
+}
+.payment-refunded {
+    color: #8B0000;
+}
 @media (max-width: 768px) {
     .page-header {
         display: flex;
@@ -38,52 +65,102 @@
                 </div>
                 <div class="row">
                     @foreach ($DataO as $O)
-                    <div class="col-md-4">
-                        <div class="card card-info card-annoucement card-round">
-                            <div class="card-body text-center">
-                                <div class="card-opening">{{ $O->order_number }}</div>
-                                <div class="card-desc">
-                                    <p>{{ $O->name_orders }}</p>
-                                </div>
-                                <div class="card-detail">
-                                    <a href="{{ route('comment.edit', $O->id_orders) }}">
-                                        <button type="button" class="btn btn-icon btn-round btn-warning">
-                                            <i class="fas fa-pen"></i>
-                                        </button>
-                                    </a>
-                                    <a href="{{ route('comment.delete', $O->id_orders) }}" class="but-delete">
-                                        <button type="button" class="btn btn-icon btn-round btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </a>
-                                    @if (Auth::user()->level == 'Super Admin')
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-icon btn-round btn-success" data-toggle="modal" data-target="#{{ $O->id_orders }}">
-                                            <i class="fas fa-history"></i>
-                                        </button>
+                    <div class="col-md-3 pl-md-0">
+                        <div class="card card-pricing">
+                            <div class="card-header p-0">
+                                <h4 class="card-title fw-bold
+                                    @if($O->status_orders == 'Pending') status-pending
+                                    @elseif($O->status_orders == 'Processing') status-processing
+                                    @elseif($O->status_orders == 'Shipped') status-shipped
+                                    @elseif($O->status_orders == 'Delivered') status-delivered
+                                    @elseif($O->status_orders == 'Canceled') status-canceled
+                                    @endif">
+                                    @if($O->status_orders == 'Pending')
+                                        <i class="fas fa-clock"></i>
+                                    @elseif($O->status_orders == 'Processing')
+                                        <i class="fas fa-box-open"></i>
+                                    @elseif($O->status_orders == 'Shipped')
+                                        <i class="fas fa-shipping-fast"></i>
+                                    @elseif($O->status_orders == 'Delivered')
+                                        <i class="fas fa-check-circle"></i>
+                                    @elseif($O->status_orders == 'Canceled')
+                                        <i class="fas fa-times-circle"></i>
+                                    @endif
+                                    {{ $O->status_orders }}
+                                </h4>
+                            </div>
+                            <div class="card-body pb-0">
+                                <ul class="specification-list">
+                                    <li>
+                                        <span class="name-specification">Order</span>
+                                        <span class="status-specification fw-bold">{{ $O->order_number }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">Name</span>
+                                        <span class="status-specification fw-bold">{{ $O->name_orders }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">Phone</span>
+                                        <span class="status-specification fw-bold">{{ $O->phone_orders }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">Product</span>
+                                        <span class="status-specification fw-bold">{{ $O->name_products }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">Quantity</span>
+                                        <span class="status-specification fw-bold">{{ $O->qty_orders }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">Total</span>
+                                        <span class="status-specification fw-bold">Rp {{ number_format($O->total_orders, 0, ',', '.') }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">Notes</span>
+                                        <span class="status-specification fw-bold">{{ $O->notes }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="name-specification">Payment</span>
+                                        <span class="status-specification fw-bold
+                                        @if($O->payment_status == 'Pending') payment-pending
+                                        @elseif($O->payment_status == 'Paid') payment-paid
+                                        @elseif($O->payment_status == 'Failed') payment-failed
+                                        @elseif($O->payment_status == 'Refunded') payment-refunded
+                                        @endif">{{ $O->payment_status }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer pt-0">
+                                <a href="{{ route('order.detail', $O->order_number) }}" class="btn btn-primary btn-block"><b>Detail</b></a>
+                                <a href="{{ route('order.edit', $O->id_orders) }}" class="btn btn-warning btn-block"><b>Edit</b></a>
+                                <a href="{{ route('order.delete', $O->id_orders) }}" class="but-delete btn btn-danger btn-block"><b>Delete</b></a>
+                                @if (Auth::user()->level == 'Super Admin')
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#{{ $O->id_orders }}">
+                                        <b>History</b>
+                                    </button>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="{{ $O->id_orders }}" tabindex="-1" role="dialog" aria-labelledby="{{ $O->id_orders }}Label" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content" style="color: black">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="{{ $O->id_orders }}Label"><b>Activity History</b></h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body" style="text-align: left;">
-                                                        <p>Created : <br>{{ $O->created_by }} <b>({{ $O->created_at }})</b></p>
-                                                        <p>Last Modified : <br>{{ $O->modified_by }} <b>({{ $O->updated_at }})</b></p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="{{ $O->id_orders }}" tabindex="-1" role="dialog" aria-labelledby="{{ $O->id_orders }}Label" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="{{ $O->id_orders }}Label"><b>Activity History</b></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" style="text-align: start">
+                                                    <p>Created : <br>{{ $O->created_by }} <b>({{ $O->created_at }})</b></p>
+                                                    <p>Last Modified : <br>{{ $O->modified_by }} <b>({{ $O->updated_at }})</b></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

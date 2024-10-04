@@ -104,7 +104,7 @@
                                     <span class="price">Rp {{ number_format($P->price_products, 0, ',', '.') }}</span>
                                 </div>
                                 <!-- End product price -->
-                                <a href="{{ route('blog.publik') }}" class="btn" style="background-color: #35A5B1">Buy Now</a>
+                                <a href="{{ route('collection.buy',$P->code_products) }}" class="btn" style="background-color: #35A5B1">Buy Now</a>
                             </div>
                             <!-- End product details -->
                         </div>
@@ -121,6 +121,23 @@
 @include('layouts.public.footer')
 @include('layouts.public.script')
 </div>
+<script>
+    @if(session('success'))
+    Swal.fire({
+        icon: "success",
+        title: "{{ session('success') }}",
+        showConfirmButton: false,
+        timer: 3000
+    });
+    @elseif(session('error'))
+    Swal.fire({
+        icon: "error",
+        title: "{{ session('error') }}",
+        showConfirmButton: false,
+        timer: 3000
+    });
+    @endif
+</script>
 @endsection
 
 <body class="template-index home2-default">

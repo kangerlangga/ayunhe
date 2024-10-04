@@ -172,4 +172,9 @@ class ProductController extends Controller
         //redirect to index
         return redirect()->route('product.data')->with(['success' => 'Product has been Deleted!']);
     }
+
+    public function getProductPrice($code) {
+        $product = Product::where('code_products', $code)->first();
+        return response()->json(['price' => $product ? $product->price_products : 0]);
+    }
 }

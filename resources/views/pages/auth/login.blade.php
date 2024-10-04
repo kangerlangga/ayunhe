@@ -177,7 +177,7 @@
             text: 'Your email or password is incorrect!',
             showConfirmButton: false,
             timer: 3000
-        })
+        });
     @enderror
 
     @error('password')
@@ -187,7 +187,7 @@
             text: 'Your email or password is incorrect!',
             showConfirmButton: false,
             timer: 3000
-        })
+        });
     @enderror
 
 </script>

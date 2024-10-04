@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name_products');
             $table->string('image_p_products');
             $table->string('image_s_products');
-            $table->string('code_products');
+            $table->string('code_products')->unique();
             $table->integer('price_products');
             $table->integer('stock_products');
             $table->string('created_by');

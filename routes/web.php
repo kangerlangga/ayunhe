@@ -21,8 +21,16 @@ Route::get('/', [PublikController::class, 'home'])->name('home.publik');
 Route::get('/about', [PublikController::class, 'about'])->name('about.publik');
 Route::get('/collection', [PublikController::class, 'collection'])->name('collection.publik');
 Route::get('/collection/buy/{id}', [PublikController::class, 'buy'])->name('collection.buy');
+Route::post('/collection/buy/submit', [PublikController::class, 'cstore'])->name('buy.submit');
 Route::get('/blog', [PublikController::class, 'blog'])->name('blog.publik');
 Route::get('/blog/detail/{id}', [BlogController::class, 'show'])->name('blog.detail');
+Route::get('/check/order/number/{id}', [PublikController::class, 'checkOrder'])->name('check.order');
+Route::get('/check/payment/receipt/{id}', [PublikController::class, 'checkReceipt'])->name('check.receipt');
+Route::get('/edit/payment/receipt/{id}', [PublikController::class, 'editReceipt'])->name('edit.receipt');
+Route::post('/update/payment/receipt/{id}', [PublikController::class, 'updateReceipt'])->name('update.receipt');
+
+Route::get('/get-product-price/{code}', [ProductController::class, 'getProductPrice']);
+
 
 // Rute Admin
 Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
@@ -63,6 +71,7 @@ Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
     Route::get('/admin/order', [OrderController::class, 'index'])->name('order.data');
     Route::get('/admin/order/add', [OrderController::class, 'create'])->name('order.add');
     Route::post('/admin/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/admin/order/detail/{id}', [OrderController::class, 'show'])->name('order.detail');
     Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
     Route::post('/admin/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::get('/admin/order/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');

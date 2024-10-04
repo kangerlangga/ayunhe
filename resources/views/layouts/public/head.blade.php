@@ -44,3 +44,7 @@
     <script type="text/javascript" src="{{  url('') }}/assets1/wap/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="{{  url('') }}/assets1/wap/floating-wpp.min.js"></script>
     <link rel="stylesheet" href="{{  url('') }}/assets1/wap/floating-wpp.min.css">
+
+    <!-- Source Sweet Alert 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
