@@ -221,22 +221,27 @@
     });
 
     document.getElementById('sendEditButton').addEventListener('click', function(e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Confirmation',
-            text: "Are you sure all the details are correct?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#35A5B1',
-            cancelButtonColor: '#AAA',
-            confirmButtonText: 'Yes, Update!',
-            cancelButtonText: 'Cancel',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('order_edit').submit();
-            }
-        });
+        var orderEditForm = document.getElementById('order_edit');
+        if (orderEditForm.checkValidity()) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Confirmation',
+                text: "Are you sure all the details are correct?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#35A5B1',
+                cancelButtonColor: '#AAA',
+                confirmButtonText: 'Yes, Update!',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    orderEditForm.submit();
+                }
+            });
+        } else {
+            orderEditForm.reportValidity();
+        }
     });
 </script>
 <script>

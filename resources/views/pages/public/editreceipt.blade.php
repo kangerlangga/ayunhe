@@ -221,21 +221,27 @@ $maskedNotes = maskData($DetailOrder->notes);
 <script>
     document.getElementById('sendReceiptButton').addEventListener('click', function(e) {
         e.preventDefault();
-        Swal.fire({
-            title: 'Confirmation',
-            text: "Are you sure your receipt details are correct? Once submitted, your receipt cannot be changed.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#35A5B1',
-            cancelButtonColor: '#AAA',
-            confirmButtonText: 'Yes, Send Receipt!',
-            cancelButtonText: 'Cancel',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('receipt_form').submit();
-            }
-        });
+
+        var form = document.getElementById('receipt_form');
+        if (form.checkValidity()) {
+            Swal.fire({
+                title: 'Confirmation',
+                text: "Are you sure your receipt details are correct?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#35A5B1',
+                cancelButtonColor: '#AAA',
+                confirmButtonText: 'Yes, Send Receipt!',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        } else {
+            form.reportValidity();
+        }
     });
 </script>
 @endsection

@@ -154,22 +154,27 @@
 
     document.getElementById('sendOrderButton').addEventListener('click', function(e) {
         e.preventDefault();
-        Swal.fire({
-            title: 'Confirmation',
-            text: "Are you sure your order details are correct? Once submitted, your order cannot be changed.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#35A5B1',
-            cancelButtonColor: '#AAA',
-            confirmButtonText: 'Yes, Order!',
-            cancelButtonText: 'Cancel',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                removeDotsFromTotal();
-                document.getElementById('order_form').submit();
-            }
-        });
+        var form = document.getElementById('order_form');
+        if (form.checkValidity()) {
+            Swal.fire({
+                title: 'Confirmation',
+                text: "Are you sure your order details are correct? Once submitted, your order cannot be changed.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#35A5B1',
+                cancelButtonColor: '#AAA',
+                confirmButtonText: 'Yes, Order!',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    removeDotsFromTotal();
+                    form.submit();
+                }
+            });
+        } else {
+            form.reportValidity();
+        }
     });
 </script>
 @endsection
