@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -20,6 +21,7 @@ class UserController extends Controller
             $data = [
                 'judul' => 'Users Management',
                 'DataU' => User::latest()->get(),
+                'cOP' => Order::where('status_orders', 'Pending')->count(),
             ];
             return view('pages.admin.user', $data);
         }else{
@@ -35,6 +37,7 @@ class UserController extends Controller
         if (Auth::user()->level == 'Super Admin') {
             $data = [
                 'judul' => 'New Account User',
+                'cOP' => Order::where('status_orders', 'Pending')->count(),
             ];
             return view('pages.admin.user_add', $data);
         }else{
@@ -104,6 +107,7 @@ class UserController extends Controller
                 $data = [
                     'judul' => 'Edit Account User',
                     'EditUser' => $akun,
+                    'cOP' => Order::where('status_orders', 'Pending')->count(),
                 ];
                 return view('pages.admin.user_edit', $data);
             }

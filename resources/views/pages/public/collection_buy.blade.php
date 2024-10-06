@@ -47,7 +47,7 @@
                 	<h2>Order Form</h2>
                     <p>Please fill out the order form below to complete your purchase. Ensure all details are accurate for a smooth transaction process.</p>
                 	<div class="formFeilds contact-form form-vertical">
-                    <form method="POST" action="{{ route('buy.submit') }}" enctype="multipart/form-data" id="contact_form" class="contact-form">
+                    <form method="POST" action="{{ route('buy.submit') }}" enctype="multipart/form-data" id="order_form" class="contact-form">
                         @csrf
                       <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <input type="hidden" name="Product" value="{{ $DetailProduct->code_products }}">
-                            <button type="submit" class="btn" style="background-color: #35A5B1; color: white;">Order Now</button>
+                            <button type="submit" class="btn" style="background-color: #35A5B1; color: white;" id="sendOrderButton">Order Now</button>
                         </div>
                      </div>
                      </form>
@@ -152,8 +152,24 @@
         totalInput.value = totalInput.value.replace(/\./g, '');
     }
 
-    document.querySelector('#contact_form').addEventListener('submit', function(e) {
-        removeDotsFromTotal();
+    document.getElementById('sendOrderButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Confirmation',
+            text: "Are you sure your order details are correct? Once submitted, your order cannot be changed.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#35A5B1',
+            cancelButtonColor: '#AAA',
+            confirmButtonText: 'Yes, Order!',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeDotsFromTotal();
+                document.getElementById('order_form').submit();
+            }
+        });
     });
 </script>
 @endsection

@@ -44,6 +44,15 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item {{ Request::is('admin/order*') ? 'active' : '' }}">
+                    <a href="{{ route('order.data') }}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Orders</p>
+                        <?php if ($cOP > 0) : ?>
+                        <span class="badge badge-warning" style="background-color: #FF8C00">{{ $cOP }}</span>
+                        <?php endif;?>
+                    </a>
+                </li>
                 <li class="nav-item {{ Request::is('admin/home*') ? 'active' : '' }}">
                     <a href="{{ route('home.data') }}">
                         <i class="fas fa-images"></i>
@@ -66,12 +75,6 @@
                     <a href="{{ route('comment.data') }}">
                         <i class="fas fa-comments"></i>
                         <p>Comments</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('admin/order*') ? 'active' : '' }}">
-                    <a href="{{ route('order.data') }}">
-                        <i class="fas fa-shopping-cart"></i>
-                        <p>Orders</p>
                     </a>
                 </li>
                 @if (Auth::user()->level == 'Super Admin')

@@ -132,20 +132,20 @@
                             </div>
                             <div class="card-footer pt-0">
                                 <a href="{{ route('order.detail', $O->order_number) }}" class="btn btn-primary btn-block"><b>Detail</b></a>
-                                <a href="{{ route('order.edit', $O->id_orders) }}" class="btn btn-warning btn-block"><b>Edit</b></a>
-                                <a href="{{ route('order.delete', $O->id_orders) }}" class="but-delete btn btn-danger btn-block"><b>Delete</b></a>
+                                <a href="{{ route('order.edit', $O->order_number) }}" class="btn btn-warning btn-block"><b>Edit</b></a>
+                                <a href="{{ route('order.delete', $O->order_number) }}" class="but-delete btn btn-danger btn-block"><b>Delete</b></a>
                                 @if (Auth::user()->level == 'Super Admin')
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#{{ $O->id_orders }}">
+                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#{{ $O->order_number }}">
                                         <b>History</b>
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="{{ $O->id_orders }}" tabindex="-1" role="dialog" aria-labelledby="{{ $O->id_orders }}Label" aria-hidden="true">
+                                    <div class="modal fade" id="{{ $O->order_number }}" tabindex="-1" role="dialog" aria-labelledby="{{ $O->order_number }}Label" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="{{ $O->id_orders }}Label"><b>Activity History</b></h5>
+                                                    <h5 class="modal-title" id="{{ $O->order_number }}Label"><b>Activity History</b></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>

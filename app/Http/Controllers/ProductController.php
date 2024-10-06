@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -19,6 +20,7 @@ class ProductController extends Controller
         $data = [
             'judul' => 'Products',
             'DataP' => Product::latest()->get(),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.product', $data);
     }
@@ -30,6 +32,7 @@ class ProductController extends Controller
     {
         $data = [
             'judul' => 'New Product',
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.product_add', $data);
     }
@@ -94,6 +97,7 @@ class ProductController extends Controller
         $data = [
             'judul' => 'Edit Product',
             'EditProduct' => Product::findOrFail($id),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.product_edit', $data);
     }

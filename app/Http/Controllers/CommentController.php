@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class CommentController extends Controller
         $data = [
             'judul' => 'Comments',
             'DataC' => Comment::latest()->get(),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.comment', $data);
     }
@@ -30,6 +32,7 @@ class CommentController extends Controller
     {
         $data = [
             'judul' => 'New Comment',
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.comment_add', $data);
     }
@@ -79,6 +82,7 @@ class CommentController extends Controller
         $data = [
             'judul' => 'Edit Comment',
             'EditComment' => Comment::findOrFail($id),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.comment_edit', $data);
     }

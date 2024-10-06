@@ -68,27 +68,6 @@
                                     <!-- End hover image -->
                                 </a>
                                 <!-- end product image -->
-                                <!-- product button -->
-                                {{-- <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                                    <button class="btn btn-addto-cart" type="button" tabindex="0">Buy Now</button>
-                                </form>
-                                <div class="button-set">
-                                    <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
-                                            <i class="icon anm anm-search-plus-r"></i>
-                                        </a>
-                                    <!-- Start product button -->
-                                    <div class="wishlist-btn">
-                                        <a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">
-                                            <i class="icon anm anm-heart-l"></i>
-                                        </a>
-                                    </div>
-                                    <div class="compare-btn">
-                                        <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
-                                            <i class="icon anm anm-random-r"></i>
-                                        </a>
-                                    </div>
-                                </div> --}}
-                                <!-- End product button -->
                             </div>
                             <!--End start product image -->
 
@@ -126,8 +105,10 @@
     Swal.fire({
         icon: "success",
         title: "{{ session('success') }}",
-        showConfirmButton: false,
-        timer: 3000
+        text: "Order Number : {{ session('id') }}",
+        showConfirmButton: true,
+        confirmButtonColor: '#35A5B1',
+        confirmButtonText: 'OK'
     });
     @elseif(session('error'))
     Swal.fire({

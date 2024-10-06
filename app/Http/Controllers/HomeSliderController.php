@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HomeSlider;
+use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class HomeSliderController extends Controller
         $data = [
             'judul' => 'Home Sliders',
             'DataHS' => HomeSlider::latest()->get(),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.home', $data);
     }
@@ -30,6 +32,7 @@ class HomeSliderController extends Controller
     {
         $data = [
             'judul' => 'New Home Slider',
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.home_add', $data);
     }
@@ -79,6 +82,7 @@ class HomeSliderController extends Controller
         $data = [
             'judul' => 'Edit Home Slider',
             'EditHomeS' => HomeSlider::findOrFail($id),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.home_edit', $data);
     }

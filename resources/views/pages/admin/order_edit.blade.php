@@ -30,7 +30,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                            <form method="POST" action="{{ route('order.update', $EditOrder->id_orders) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('order.update', $EditOrder->id_orders) }}" enctype="multipart/form-data" id="order_edit">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -72,7 +72,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="Product">Product</label>
-                                            <input class="form-control" name="Product" value="{{ $EditOrder->name_products }} ({{ $EditOrder->code_products }})" id="Product" readonly style="cursor: not-allowed">
+                                            <input class="form-control" name="Product" value="{{ $DetailProduk->name_products }} ({{ $DetailProduk->code_products }})" id="Product" readonly style="cursor: not-allowed">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="col-sm-12 mt-1">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-success fw-bold text-uppercase">
+                                            <button type="submit" class="btn btn-success fw-bold text-uppercase" id="sendEditButton">
                                                 <i class="fas fa-save mr-2"></i>Save
                                             </button>
                                             <a href="{{ route('order.data') }}" class="btn btn-warning fw-bold text-uppercase but-back">
@@ -219,62 +219,28 @@
             }
         });
     });
+
+    document.getElementById('sendEditButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Confirmation',
+            text: "Are you sure all the details are correct?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#35A5B1',
+            cancelButtonColor: '#AAA',
+            confirmButtonText: 'Yes, Update!',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('order_edit').submit();
+            }
+        });
+    });
 </script>
 <script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-        var productSelect = document.getElementById('Product');
-        if (productSelect.value === "") {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Please select a product before submitting!',
-                confirmButtonText: 'OK'
-            });
-        }
-    });
 
-    let productPrice = 0;
-
-    document.getElementById('Product').addEventListener('change', function() {
-        const productCode = this.value;
-
-        if (productCode) {
-            fetch(`/get-product-price/${productCode}`)
-                .then(response => response.json())
-                .then(data => {
-                    productPrice = data.price;
-                    updateTotal();
-                }).catch(error => console.log('Error fetching product price:', error));
-        } else {
-            productPrice = 0;
-            updateTotal();
-        }
-    });
-
-    document.getElementById('Quantity').addEventListener('input', function() {
-        updateTotal();
-    });
-
-    function updateTotal() {
-        const quantity = document.getElementById('Quantity').value;
-        const total = productPrice * quantity;
-
-        document.getElementById('Total').value = formatCurrency(total) || 0;
-    }
-
-    function formatCurrency(value) {
-        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
-    function removeDotsFromTotal() {
-        const totalInput = document.getElementById('Total');
-        totalInput.value = totalInput.value.replace(/\./g, '');
-    }
-
-    document.querySelector('form').addEventListener('submit', function(e) {
-        removeDotsFromTotal();
-    });
 </script>
 @endsection
 

@@ -30,7 +30,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                            <form method="POST" action="{{ route('order.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('order.store') }}" enctype="multipart/form-data" id="order_add">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -164,7 +164,7 @@
                                     </div>
                                     <div class="col-sm-12 mt-1">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary fw-bold text-uppercase">
+                                            <button type="submit" class="btn btn-primary fw-bold text-uppercase" id="sendAddButton">
                                                 <i class="fas fa-save mr-2"></i>Save
                                             </button>
                                             <button type="reset" class="btn btn-warning fw-bold text-uppercase">
@@ -201,19 +201,6 @@
         timer: 3000
     });
     @endif
-
-    document.querySelector('form').addEventListener('submit', function(e) {
-        var productSelect = document.getElementById('Product');
-        if (productSelect.value === "") {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Please select a product before submitting!',
-                confirmButtonText: 'OK'
-            });
-        }
-    });
 
     let productPrice = 0;
 
@@ -254,8 +241,38 @@
     }
 
     document.querySelector('form').addEventListener('submit', function(e) {
-        removeDotsFromTotal();
+        var productSelect = document.getElementById('Product');
+        if (productSelect.value === "") {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please select a product before submitting!',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#35A5B1',
+            });
+        } else {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Confirmation',
+                text: "Are you sure all the details are correct?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#35A5B1',
+                cancelButtonColor: '#AAA',
+                confirmButtonText: 'Yes, Save!',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    removeDotsFromTotal();
+                    document.getElementById('order_add').submit();
+                }
+            });
+        }
     });
+
+
 </script>
 @endsection
 

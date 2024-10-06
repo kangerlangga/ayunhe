@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Comment;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,18 +21,7 @@ class AdminController extends Controller
             'cS' => Product::sum('stock_products'),
             'cB' => Blog::count(),
             'cC' => Comment::count(),
-            // 'jBs' => Beranda::where('visib_beranda', 'Tampilkan')->count(),
-            // 'jBh' => Beranda::where('visib_beranda', 'Sembunyikan')->count(),
-            // 'jPs' => Pegawai::where('visib_pegawai', 'Tampilkan')->count(),
-            // 'jPh' => Pegawai::where('visib_pegawai', 'Sembunyikan')->count(),
-            // 'jEs' => Ekstra::where('visib_ekstra', 'Tampilkan')->count(),
-            // 'jEh' => Ekstra::where('visib_ekstra', 'Sembunyikan')->count(),
-            // 'jGs' => Galeri::where('visib_galeri', 'Tampilkan')->count(),
-            // 'jGh' => Galeri::where('visib_galeri', 'Sembunyikan')->count(),
-            // 'jAs' => Artikel::where('visib_artikel', 'Tampilkan')->count(),
-            // 'jAh' => Artikel::where('visib_artikel', 'Sembunyikan')->count(),
-            // 'jBTs' => Berita::where('visib_berita', 'Tampilkan')->count(),
-            // 'jBTh' => Berita::where('visib_berita', 'Sembunyikan')->count(),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.dashboard', $data);
     }
@@ -40,6 +30,7 @@ class AdminController extends Controller
     {
         $data = [
             'judul' => 'Edit Profile',
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.profile_edit', $data);
     }
@@ -80,6 +71,7 @@ class AdminController extends Controller
     {
         $data = [
             'judul' => 'Change Password',
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.profile_editpass', $data);
     }

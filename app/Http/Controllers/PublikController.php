@@ -87,10 +87,12 @@ class PublikController extends Controller
             'Notes'     => 'max:25',
         ]);
 
+        $ordernum = strtoupper(Str::random(19));
+
         //create
         Order::create([
             'id_orders'         => 'Order'.Str::random(33),
-            'order_number'      => strtoupper(Str::random(19)),
+            'order_number'      => $ordernum,
             'name_orders'       => $request->Name,
             'email_orders'      => $request->Email,
             'phone_orders'      => $request->Phone,
@@ -107,6 +109,77 @@ class PublikController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('collection.publik')->with(['success' => 'Thanks for your order!']);
+        return redirect()->route('collection.publik')->with(['success' => 'Thanks for your order!','id' => $ordernum]);
+    }
+
+    public function checkOrder(string $id)
+    {
+        $order = Order::where('order_number', $id)->firstOrFail();
+        $productData = Product::where('code_products', $order->product_orders)->firstOrFail();
+
+        $data = [
+            'judul' => 'Order Status',
+            'DetailProduct' => $productData,
+            'DetailOrder' => $order,
+        ];
+        return view('pages.public.checkorder', $data);
+    }
+
+    public function checkReceipt(string $id)
+    {
+        $payment = Order::where('order_number', $id)->firstOrFail();
+        $productData = Product::where('code_products', $payment->product_orders)->firstOrFail();
+
+        $data = [
+            'judul' => 'Payment Status',
+            'DetailProduct' => $productData,
+            'DetailPayment' => $payment,
+        ];
+        return view('pages.public.checkpayment', $data);
+    }
+
+    public function editReceipt(string $id)
+    {
+        $order = Order::where('order_number', $id)->firstOrFail();
+        if ($order->payment_status != 'Paid') {
+            $productData = Product::where('code_products', $order->product_orders)->firstOrFail();
+            $data = [
+                'judul' => 'Order Status',
+                'DetailProduct' => $productData,
+                'DetailOrder' => $order,
+            ];
+            return view('pages.public.editreceipt', $data);
+        }else{
+            return redirect()->route('check.receipt', $id);
+        }
+    }
+
+    public function updateReceipt(Request $request, string $id): RedirectResponse
+    {
+        $order = Order::where('order_number', $id)->firstOrFail();
+        if ($order->payment_status != 'Paid') {
+            $request->validate([
+                'Email'     => 'required|email|max:255',
+                'ImageP'    => 'required|mimes:jpeg,jpg,png,pdf|max:3072',
+            ]);
+            if ($request->hasFile('ImageP')) {
+                if (!is_null($order->proof_of_payment)) {
+                    $imagePPath = 'assets1/img/Payment/' . $order->proof_of_payment;
+                    if (file_exists($imagePPath)) {
+                        unlink($imagePPath);
+                    }
+                }
+                $imageP = $request->file('ImageP');
+                $imagePName = time().'Receipt'.Str::random(17) . '.' . $imageP->getClientOriginalExtension();
+                $imageP->move('assets1/img/Payment', $imagePName);
+            }
+            $order->update([
+                'proof_of_payment'  => $imagePName,
+                'modified_by'      => $request->Email.' (Customer Upload)',
+            ]);
+            return redirect()->route('collection.publik')->with(['success' => 'Thanks for uploading your receipt!','id' => $id]);
+        }else{
+            return redirect()->route('check.receipt', $id);
+        }
     }
 }

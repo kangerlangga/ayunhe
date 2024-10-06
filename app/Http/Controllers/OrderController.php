@@ -29,6 +29,7 @@ class OrderController extends Controller
                 )
                 ->latest('orders.created_at')
                 ->get(),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.order', $data);
     }
@@ -41,6 +42,7 @@ class OrderController extends Controller
         $data = [
             'judul' => 'New Order',
             'ListP' => Product::latest()->get(),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.order_add', $data);
     }
@@ -110,6 +112,7 @@ class OrderController extends Controller
             'judul' => 'Order Details',
             'DetailOrder' => $order,
             'DetailProduk' => $product,
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.order_detail', $data);
     }
@@ -117,11 +120,15 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): View
+    public function edit(string $orderNumber): View
     {
+        $order = Order::where('order_number', $orderNumber)->firstOrFail();
+        $product = Product::where('code_products', $order->product_orders)->first();
         $data = [
             'judul' => 'Edit Order',
-            'EditOrder' => Order::findOrFail($id),
+            'EditOrder' => $order,
+            'DetailProduk' => $product,
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.order_edit', $data);
     }
@@ -180,8 +187,7 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //get by ID
-        $order = Order::findOrFail($id);
+        $order = Order::where('order_number', $id)->firstOrFail();
         if (!is_null($order->proof_of_payment)) {
             $imagePPath = 'assets1/img/Payment/' . $order->proof_of_payment;
             if (file_exists($imagePPath)) {

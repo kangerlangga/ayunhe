@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class BlogController extends Controller
         $data = [
             'judul' => 'Blogs',
             'DataB' => Blog::latest()->get(),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.blog', $data);
     }
@@ -30,6 +32,7 @@ class BlogController extends Controller
     {
         $data = [
             'judul' => 'New Article',
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.blog_add', $data);
     }
@@ -78,6 +81,7 @@ class BlogController extends Controller
         $data = [
             'judul' => $blogData->title_blog,
             'DetailBlog' => $blogData,
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.public.blog_detail', $data);
     }
@@ -90,6 +94,7 @@ class BlogController extends Controller
         $data = [
             'judul' => 'Edit Article',
             'EditArticle' => Blog::findOrFail($id),
+            'cOP' => Order::where('status_orders', 'Pending')->count(),
         ];
         return view('pages.admin.blog_edit', $data);
     }
