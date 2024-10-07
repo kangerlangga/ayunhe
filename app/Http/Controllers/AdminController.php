@@ -22,6 +22,9 @@ class AdminController extends Controller
             'cB' => Blog::count(),
             'cC' => Comment::count(),
             'cOP' => Order::where('status_orders', 'Pending')->count(),
+            'cOPr' => Order::where('status_orders', 'Processing')->count(),
+            'cOS' => Order::where('status_orders', 'Shipped')->count(),
+            'cOD' => Order::where('status_orders', 'Delivered')->count(),
         ];
         return view('pages.admin.dashboard', $data);
     }

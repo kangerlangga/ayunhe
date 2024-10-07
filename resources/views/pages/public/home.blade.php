@@ -85,27 +85,6 @@
                                     <!-- End hover image -->
                                 </a>
                                 <!-- end product image -->
-                                <!-- product button -->
-                                {{-- <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                                    <button class="btn btn-addto-cart" type="button" tabindex="0">Add To Cart</button>
-                                </form> --}}
-                                {{-- <div class="button-set">
-                                    <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
-                                            <i class="icon anm anm-search-plus-r"></i>
-                                        </a>
-                                    <!-- Start product button -->
-                                    <div class="wishlist-btn">
-                                        <a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">
-                                            <i class="icon anm anm-heart-l"></i>
-                                        </a>
-                                    </div>
-                                    <div class="compare-btn">
-                                        <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
-                                            <i class="icon anm anm-random-r"></i>
-                                        </a>
-                                    </div>
-                                </div> --}}
-                                <!-- End product button -->
                             </div>
                             <!--End start product image -->
 
@@ -139,7 +118,7 @@
 
         <?php if ($cC > 0) : ?>
         <!--Testimonial Slider-->
-        <div class="section testimonial-slider mb-5 pt-0 pb-0" style="background-color: #e3e3e3">
+        <div class="section testimonial-slider pt-0 pb-0" style="background-color: #e3e3e3">
         	<div class="container-fluid">
                 <div class="quote-wraper" style="background-color: #e3e3e3">
                     <!--Testimonial Slider Title-->
@@ -167,7 +146,7 @@
 
         <?php if ($cB > 0) : ?>
         <!--Latest Blog-->
-        <div class="latest-blog section pt-0 mb-3">
+        <div class="latest-blog section">
         	<div class="container">
             	<div class="row">
                 	<div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -176,7 +155,7 @@
 					    </div>
             		</div>
                 </div>
-            	<div class="row">
+            	<div class="row mt-2">
                     @foreach ($Blog as $B)
                 	<div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     	<div class="wrap-blog">
@@ -202,7 +181,7 @@
                     @endforeach
                 </div>
                 <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center mt-5">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center mt-4">
                         <a href="{{ route('blog.publik') }}" style="background-color: #35A5B1" class="btn">View All</a>
                     </div>
                 </div>

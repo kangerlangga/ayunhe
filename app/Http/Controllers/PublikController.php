@@ -23,8 +23,8 @@ class PublikController extends Controller
             'judul' => 'Home',
             'cHS' => HomeSlider::where('visib_home_sliders', 'Showing')->count(),
             'HomeSlider' => HomeSlider::where('visib_home_sliders', 'Showing')->latest()->get(),
-            'cP' => Product::count(),
-            'Product' => Product::latest()->limit(4)->get(),
+            'cP' => Product::where('stock_products', '>', 0)->count(),
+            'Product' => Product::where('stock_products', '>', 0)->latest()->limit(4)->get(),
             'cC' => Comment::where('visib_comments', 'Showing')->count(),
             'Comment' => Comment::where('visib_comments', 'Showing')->latest()->limit(3)->get(),
             'cB' => Blog::where('visib_blog', 'Showing')->count(),
@@ -46,8 +46,8 @@ class PublikController extends Controller
     {
         return view('pages.public.collection', [
             'judul' => 'Our Collections',
-            'cP' => Product::count(),
-            'Product' => Product::latest()->get(),
+            'cP' => Product::where('stock_products', '>', 0)->count(),
+            'Product' => Product::where('stock_products', '>', 0)->latest()->get(),
         ]);
     }
 

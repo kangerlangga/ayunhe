@@ -105,7 +105,7 @@
     Swal.fire({
         icon: "success",
         title: "{{ session('success') }}",
-        text: "Order Number : {{ session('id') }}",
+        text: "Order Number : {{ session('id') }} \nPlease save this Order Number to check your order status!",
         showConfirmButton: true,
         confirmButtonColor: '#35A5B1',
         confirmButtonText: 'OK'
