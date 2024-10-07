@@ -89,7 +89,19 @@ class PublikController extends Controller
 
         $ordernum = strtoupper(Str::random(19));
 
-        //create
+        // Get product from database
+        $product = Product::where('code_products', $request->Product)->first();
+
+        // Check if stock is sufficient
+        if ($product->stock_products < $request->Quantity) {
+            return redirect()->route('collection.publik')->withErrors(['error' => 'Stock is not sufficient.']);
+        }
+
+        // Reduce stock based on ordered quantity
+        $product->stock_products -= $request->Quantity;
+        $product->save();
+
+        // Create order
         Order::create([
             'id_orders'         => 'Order'.Str::random(33),
             'order_number'      => $ordernum,
@@ -108,9 +120,10 @@ class PublikController extends Controller
             'modified_by'       => $request->Email.' (Customer)',
         ]);
 
-        //redirect to index
-        return redirect()->route('collection.publik')->with(['success' => 'Thanks for your order!','id' => $ordernum]);
+        // Redirect to index with success message
+        return redirect()->route('collection.publik')->with(['success' => 'Thanks for your order!', 'id' => $ordernum]);
     }
+
 
     public function checkOrder(string $id)
     {

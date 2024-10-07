@@ -133,8 +133,8 @@
                             <div class="card-footer pt-0">
                                 <a href="{{ route('order.detail', $O->order_number) }}" class="btn btn-primary btn-block"><b>Detail</b></a>
                                 <a href="{{ route('order.edit', $O->order_number) }}" class="btn btn-warning btn-block"><b>Edit</b></a>
-                                <a href="{{ route('order.delete', $O->order_number) }}" class="but-delete btn btn-danger btn-block"><b>Delete</b></a>
                                 @if (Auth::user()->level == 'Super Admin')
+                                    <a href="{{ route('order.delete', $O->order_number) }}" class="but-delete btn btn-danger btn-block"><b>Delete</b></a>
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#{{ $O->order_number }}">
                                         <b>History</b>

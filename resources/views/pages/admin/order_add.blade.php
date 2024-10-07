@@ -203,6 +203,7 @@
     @endif
 
     let productPrice = 0;
+    let productStock = 0;
 
     document.getElementById('Product').addEventListener('change', function() {
         const productCode = this.value;
@@ -212,11 +213,15 @@
                 .then(response => response.json())
                 .then(data => {
                     productPrice = data.price;
+                    productStock = data.stock;
                     updateTotal();
+                    updateStock();
                 });
         } else {
             productPrice = 0;
+            productStock = 0;
             updateTotal();
+            updateStock();
         }
     });
 
@@ -229,6 +234,11 @@
         const total = productPrice * quantity;
 
         document.getElementById('Total').value = formatCurrency(total) || 0;
+    }
+
+    function updateStock() {
+        const stock = productStock;
+        document.getElementById('Quantity').setAttribute('max', stock);
     }
 
     function formatCurrency(value) {

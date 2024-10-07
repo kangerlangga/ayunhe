@@ -72,11 +72,23 @@ class OrderController extends Controller
             $imageP = $request->file('ImageP');
             $imagePName = time().'Receipt'.Str::random(17) . '.' . $imageP->getClientOriginalExtension();
             $imageP->move('assets1/img/Payment', $imagePName);
-        }else{
+        } else {
             $imagePName = NULL;
         }
 
-        //create
+        // Get product from database
+        $product = Product::where('code_products', $request->Product)->first();
+
+        // Check if stock is sufficient
+        if ($product->stock_products < $request->Quantity) {
+            return redirect()->route('order.add')->withErrors(['error' => 'Stock is not sufficient.']);
+        }
+
+        // Reduce stock based on ordered quantity
+        $product->stock_products -= $request->Quantity;
+        $product->save();
+
+        // Create order
         Order::create([
             'id_orders'         => 'Order'.Str::random(33),
             'order_number'      => strtoupper(Str::random(19)),
@@ -97,7 +109,7 @@ class OrderController extends Controller
             'modified_by'       => Auth::user()->email,
         ]);
 
-        //redirect to index
+        // Redirect to index with success message
         return redirect()->route('order.add')->with(['success' => 'Order has been Added!']);
     }
 

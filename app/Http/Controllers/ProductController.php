@@ -179,6 +179,6 @@ class ProductController extends Controller
 
     public function getProductPrice($code) {
         $product = Product::where('code_products', $code)->first();
-        return response()->json(['price' => $product ? $product->price_products : 0]);
+        return response()->json(['price' => $product ? $product->price_products : 0, 'stock' => $product ? $product->stock_products : 0]);
     }
 }

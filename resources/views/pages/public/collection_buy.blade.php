@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="form-group">
-                                <input type="number" min="1" id="Quantity" name="Quantity" placeholder="Quantity" value="{{ old('Quantity') }}" required>
+                                <input type="number" min="1" max="{{ $DetailProduct->stock_products }}" id="Quantity" name="Quantity" placeholder="Quantity" value="{{ old('Quantity') }}" required>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
