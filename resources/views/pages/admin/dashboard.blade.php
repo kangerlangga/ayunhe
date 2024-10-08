@@ -174,6 +174,16 @@
                             </div>
                         </div>
                     </div>
+                    @if (Auth::user()->level == 'Super Admin')
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card text-white" style="background: linear-gradient(to bottom right, #35A5B1, #2C8C9D)">
+                            <div class="card-body">
+                                <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Current Active Visitors</h4>
+                                <h1 class="mb-4 fw-bold">{{ $cVO }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

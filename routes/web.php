@@ -6,7 +6,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeSliderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublikController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdmin;
@@ -30,7 +29,6 @@ Route::get('/edit/payment/receipt/{id}', [PublikController::class, 'editReceipt'
 Route::post('/update/payment/receipt/{id}', [PublikController::class, 'updateReceipt'])->name('update.receipt');
 
 Route::get('/get-product-price/{code}', [ProductController::class, 'getProductPrice']);
-
 
 // Rute Admin
 Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
