@@ -175,11 +175,31 @@
                         </div>
                     </div>
                     @if (Auth::user()->level == 'Super Admin')
-                    <div class="col-sm-6 col-md-3">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Visitor Statistics</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="visStatistics"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="card text-white" style="background: linear-gradient(to bottom right, #35A5B1, #2C8C9D)">
                             <div class="card-body">
-                                <h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Current Active Visitors</h4>
+                                <h4 class="mt-3 b-b1 pb-2 mb-3 fw-bold">Current Active Visitors</h4>
                                 <h1 class="mb-4 fw-bold">{{ $cVO }}</h1>
+                                @if ($cTP > 2)
+                                <h4 class="mt-3 b-b1 pb-2 mb-3 fw-bold">Top Active Pages</h4>
+                                <ul class="list-unstyled">
+                                    @foreach ($topPages as $tp)
+                                    <li class="d-flex justify-content-between pb-1 pt-1"><small>{{ $tp->url }}</small> <span>{{ $tp->visit_count }}</span></li>
+                                    @endforeach
+                                </ul>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -208,6 +228,56 @@
     @endif
 </script>
 @include('layouts.admin.script')
+<script>
+    var visStatistics = document.getElementById('visStatistics').getContext('2d');
+
+    async function fetchVisitorData() {
+        const response = await fetch('/assets2/visitors-stats');
+        return await response.json();
+    }
+
+    async function displayChart() {
+        const visitorsData = await fetchVisitorData();
+        const completeData = [];
+        const labels = [];
+
+        for (let i = 9; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            const formattedDate = date.toISOString().split('T')[0];
+            const options = { month: 'short', day: 'numeric' };
+            labels.push(date.toLocaleDateString('en-US', options));
+
+            const visitCount = visitorsData.find(data => data.visit_date === formattedDate);
+            completeData.push(visitCount ? visitCount.visit_count : 0);
+        }
+
+        var myVisChart = new Chart(visStatistics, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Visitors",
+                    backgroundColor: '#35A5B1',
+                    borderColor: '#35A5B1',
+                    data: completeData,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+            }
+        });
+    }
+    displayChart();
+</script>
 @endsection
 
 <body>

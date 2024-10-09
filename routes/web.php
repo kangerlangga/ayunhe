@@ -33,6 +33,7 @@ Route::get('/get-product-price/{code}', [ProductController::class, 'getProductPr
 // Rute Admin
 Route::middleware(['auth', 'verified', CheckAdmin::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dash');
+    Route::get('/assets2/visitors-stats', [AdminController::class, 'getVisitorsStatistics']);
     Route::get('/admin/profile/edit', [AdminController::class, 'editProf'])->name('prof.edit');
     Route::post('/admin/profile/updateProfile', [AdminController::class, 'updateProf'])->name('prof.update');
     Route::get('/admin/profile/editPass', [AdminController::class, 'editPass'])->name('prof.edit.pass');
