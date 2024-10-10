@@ -249,7 +249,7 @@
             labels.push(date.toLocaleDateString('en-US', options));
 
             const visitCount = visitorsData.find(data => data.visit_date === formattedDate);
-            completeData.push(visitCount ? visitCount.visit_count : 0);
+            completeData.push(visitCount ? visitCount.unique_visitors : 0);
         }
 
         var myVisChart = new Chart(visStatistics, {
@@ -257,7 +257,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: "Visitors",
+                    label: "Unique Visitors",
                     backgroundColor: '#35A5B1',
                     borderColor: '#35A5B1',
                     data: completeData,

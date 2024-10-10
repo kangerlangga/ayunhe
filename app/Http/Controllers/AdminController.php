@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class AdminController extends Controller
             'cVO' => DB::table('sessions')->where('last_activity', '>=', $fiveMinutesAgo)->count(),
             'cTP' => Visit::where('url', 'NOT LIKE', '%/assets1/%')->where('url', 'NOT LIKE', '%/assets2/%')
             ->distinct('url')->count('url'),
-            'topPages' => Visit::select('url', DB::raw('count(*) as visit_count'))
+            'topPages' => Visit::select('url', DB::raw('count(DISTINCT CONCAT(ip, useragent)) as visit_count'))
             ->where('url', 'NOT LIKE', '%/assets1/%')
             ->where('url', 'NOT LIKE', '%/assets2/%')
             ->groupBy('url')->orderBy('visit_count', 'desc')->limit(2)->get(),
@@ -42,12 +43,13 @@ class AdminController extends Controller
 
     public function getVisitorsStatistics()
     {
-        $visitorsData = DB::table('shetabit_visits')
-            ->select(DB::raw('DATE(created_at) as visit_date'), DB::raw('count(*) as visit_count'))
-            ->where('created_at', '>=', now()->subDays(10))
-            ->groupBy('visit_date')
-            ->orderBy('visit_date', 'asc')
-            ->get();
+        $visitorsData = DB::table('shetabit_visits')->select(
+        DB::raw('DATE(created_at) as visit_date'),
+        DB::raw('COUNT(DISTINCT CONCAT(ip, useragent)) as unique_visitors'))
+        ->where('created_at', '>=', Carbon::now()->subDays(10))
+        ->groupBy('visit_date')
+        ->orderBy('visit_date', 'asc')
+        ->get();
         return response()->json($visitorsData);
     }
 
