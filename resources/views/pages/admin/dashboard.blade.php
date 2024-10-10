@@ -257,7 +257,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: "Unique Visitors",
+                    label: "Visitors",
                     backgroundColor: '#35A5B1',
                     borderColor: '#35A5B1',
                     data: completeData,
