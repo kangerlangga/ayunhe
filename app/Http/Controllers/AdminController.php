@@ -31,12 +31,14 @@ class AdminController extends Controller
             'cOS' => Order::where('status_orders', 'Shipped')->count(),
             'cOD' => Order::where('status_orders', 'Delivered')->count(),
             'cVO' => DB::table('sessions')->where('last_activity', '>=', $fiveMinutesAgo)->count(),
-            'cTP' => Visit::where('url', 'NOT LIKE', '%/assets1/%')->where('url', 'NOT LIKE', '%/assets2/%')
-            ->distinct('url')->count('url'),
+            'cTP' => Visit::where(function($query) {$query->where('url', '/')->orWhere('url', '/about')
+                    ->orWhere('url', '/collection')->orWhere('url', 'LIKE', '/collection/buy/%')
+                    ->orWhere('url', '/blog')->orWhere('url', 'LIKE', '/blog/detail/%');})
+                    ->distinct('url')->count('url'),
             'topPages' => Visit::select('url', DB::raw('count(DISTINCT CONCAT(ip, useragent)) as visit_count'))
-            ->where('url', 'NOT LIKE', '%/assets1/%')
-            ->where('url', 'NOT LIKE', '%/assets2/%')
-            ->groupBy('url')->orderBy('visit_count', 'desc')->limit(2)->get(),
+                    ->where(function($query) {$query->where('url', '/')->orWhere('url', '/about')->orWhere('url', '/collection')
+                    ->orWhere('url', 'LIKE', '/collection/buy/%')->orWhere('url', '/blog')->orWhere('url', 'LIKE', '/blog/detail/%');})
+                    ->groupBy('url')->orderBy('visit_count', 'desc')->limit(2)->get(),
         ];
         return view('pages.admin.dashboard', $data);
     }
