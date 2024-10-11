@@ -31,14 +31,30 @@ class AdminController extends Controller
             'cOS' => Order::where('status_orders', 'Shipped')->count(),
             'cOD' => Order::where('status_orders', 'Delivered')->count(),
             'cVO' => DB::table('sessions')->where('last_activity', '>=', $fiveMinutesAgo)->count(),
-            'cTP' => Visit::where(function($query) {$query->where('url', '/')->orWhere('url', '/about')
-                    ->orWhere('url', '/collection')->orWhere('url', 'LIKE', '/collection/buy/%')
-                    ->orWhere('url', '/blog')->orWhere('url', 'LIKE', '/blog/detail/%');})
-                    ->distinct('url')->count('url'),
+            'cTP' => Visit::where('url', 'NOT LIKE', '%/assets1/%')->where('url', 'NOT LIKE', '%/assets2/%')
+            ->where('url', 'NOT LIKE', '%/admin/%')
+            ->where('url', 'NOT LIKE', '%/admin%')
+            ->where('url', 'NOT LIKE', '%/login-admin%')
+            ->where('url', 'NOT LIKE', '%/verifikasi%')
+            ->where('url', 'NOT LIKE', '%/logout%')
+            ->where('url', 'NOT LIKE', '%/check/%')
+            ->where('url', 'NOT LIKE', '%/payment/%')
+            ->where('url', 'NOT LIKE', '%/submit%')
+            ->where('url', 'NOT LIKE', '%/get%')
+            ->distinct('url')->count('url'),
             'topPages' => Visit::select('url', DB::raw('count(DISTINCT CONCAT(ip, useragent)) as visit_count'))
-                    ->where(function($query) {$query->where('url', '/')->orWhere('url', '/about')->orWhere('url', '/collection')
-                    ->orWhere('url', 'LIKE', '/collection/buy/%')->orWhere('url', '/blog')->orWhere('url', 'LIKE', '/blog/detail/%');})
-                    ->groupBy('url')->orderBy('visit_count', 'desc')->limit(2)->get(),
+            ->where('url', 'NOT LIKE', '%/assets1/%')
+            ->where('url', 'NOT LIKE', '%/assets2/%')
+            ->where('url', 'NOT LIKE', '%/admin/%')
+            ->where('url', 'NOT LIKE', '%/admin%')
+            ->where('url', 'NOT LIKE', '%/login-admin%')
+            ->where('url', 'NOT LIKE', '%/verifikasi%')
+            ->where('url', 'NOT LIKE', '%/logout%')
+            ->where('url', 'NOT LIKE', '%/check/%')
+            ->where('url', 'NOT LIKE', '%/payment/%')
+            ->where('url', 'NOT LIKE', '%/submit%')
+            ->where('url', 'NOT LIKE', '%/get%')
+            ->groupBy('url')->orderBy('visit_count', 'desc')->limit(2)->get(),
         ];
         return view('pages.admin.dashboard', $data);
     }
