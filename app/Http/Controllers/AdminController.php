@@ -42,6 +42,7 @@ class AdminController extends Controller
             ->where('url', 'NOT LIKE', '%/submit%')
             ->where('url', 'NOT LIKE', '%/get%')
             ->where('url', 'NOT LIKE', '%/151%')
+            ->where('url', 'NOT LIKE', '%/cms%')
             ->distinct('url')->count('url'),
             'topPages' => Visit::select('url', DB::raw('count(DISTINCT CONCAT(ip, useragent)) as visit_count'))
             ->where('url', 'NOT LIKE', '%/assets1/%')
@@ -56,6 +57,7 @@ class AdminController extends Controller
             ->where('url', 'NOT LIKE', '%/submit%')
             ->where('url', 'NOT LIKE', '%/get%')
             ->where('url', 'NOT LIKE', '%/151%')
+            ->where('url', 'NOT LIKE', '%/cms%')
             ->groupBy('url')->orderBy('visit_count', 'desc')->limit(2)->get(),
         ];
         return view('pages.admin.dashboard', $data);
