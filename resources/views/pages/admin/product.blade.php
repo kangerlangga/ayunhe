@@ -11,7 +11,7 @@
 }
 
 .card-img-container .img-1 {
-    transition: opacity 0.5s ease-in-out; /* Transisi untuk menghilangkan gambar pertama */
+    transition: opacity 0.5s ease-in-out;
 }
 
 .card-img-container .img-2 {
@@ -20,17 +20,17 @@
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Mulai gambar kedua dengan opacity 0 */
-    transition: opacity 0.5s ease-in-out; /* Transisi untuk menampilkan gambar kedua */
-    z-index: 1; /* Pastikan gambar kedua berada di atas */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;
 }
 
 .card-img-container:hover .img-2 {
-    opacity: 1; /* Saat di-hover, gambar kedua muncul */
+    opacity: 1;
 }
 
 .card-img-container:hover .img-1 {
-    opacity: 0; /* Saat di-hover, gambar pertama hilang */
+    opacity: 0;
 }
 
 @media (max-width: 768px) {
