@@ -29,7 +29,7 @@
     <!-- WEBSITE META -->
     <title>{{ $judul }} | Ayunhe Scarves</title>
     <meta name="keywords" content="Ayunhe, Ayunhe Scarves, Ayunhe Official Website">
-    <meta name="description" content="Ayunhe adalah sebuah perusahaan fashion yang berfokus pada produk hijab dan busana muslim.">
+    <meta name="description" content="Ayunhe Scarves adalah perusahaan fashion yang khusus memproduksi hijab berkualitas tinggi. Kami berkomitmen untuk menghadirkan berbagai pilihan hijab yang menggabungkan keanggunan, kenyamanan, dan tren terkini.">
     <link rel="icon" type="image/png" href="{{  url('') }}/assets1/logo/logo.png">
 
     <!-- Plugins CSS -->
